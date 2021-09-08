@@ -5,6 +5,7 @@ import re
 from pdfrw import PdfReader, PdfWriter, PageMerge
 import fitz
 from PIL import Image
+from datetime import datetime
 
 
 TEMP = "Temp"
@@ -30,6 +31,20 @@ def createPDF(pdf):
     writer.write(TEMP+os.sep+"input.pdf")
 
 def createImages():
+    now = datetime.now() # current date and time
+    year = now.strftime("%Y")
+#     print("year:", year)
+    month = now.strftime("%m")
+#     print("month:", month)
+
+    day = now.strftime("%d")
+#     print("day:", day)
+
+    time = now.strftime("%H:%M:%S")
+#     print("time:", time)
+
+    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+    
     zoom_x = 2.0  # horizontal zoom
     zomm_y = 2.0  # vertical zoom
     mat = fitz.Matrix(zoom_x, zomm_y)  # zoom factor 2 in each dimension
@@ -37,7 +52,7 @@ def createImages():
     for x in doc:
         pix = x.get_pixmap(alpha=False,matrix=mat)
         img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-        img.save("%s%s.jpg" %(TEMP+os.sep,format(x.number, '04d')))
+        img.save("%s%s%s.jpg" %(date_time,TEMP+os.sep,format(x.number, '04d')))
         #pix.writePNG("%i.png" % x.number)
         
 def renameFiles():
