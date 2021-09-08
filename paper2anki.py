@@ -32,18 +32,18 @@ def createPDF(pdf):
 
 def createImages():
     now = datetime.now() # current date and time
-    year = now.strftime("%Y")
-#     print("year:", year)
-    month = now.strftime("%m")
-#     print("month:", month)
+#     year = now.strftime("%Y")
+# #     print("year:", year)
+#     month = now.strftime("%m")
+# #     print("month:", month)
 
-    day = now.strftime("%d")
-#     print("day:", day)
+#     day = now.strftime("%d")
+# #     print("day:", day)
 
-    time = now.strftime("%H:%M:%S")
-#     print("time:", time)
+#     time = now.strftime("%H:%M:%S")
+# #     print("time:", time)
 
-    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+#     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     
     zoom_x = 2.0  # horizontal zoom
     zomm_y = 2.0  # vertical zoom
@@ -52,7 +52,7 @@ def createImages():
     for x in doc:
         pix = x.get_pixmap(alpha=False,matrix=mat)
         img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-        img.save("%s%s%s.jpg" %(date_time,TEMP+os.sep,format(x.number, '04d')))
+        img.save("%s%s%s.jpg" %(now,TEMP+os.sep,format(x.number, '04d')))
         #pix.writePNG("%i.png" % x.number)
         
 def renameFiles():
