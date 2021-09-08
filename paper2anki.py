@@ -30,8 +30,8 @@ def createPDF(pdf):
         writer.addpages(splitpage(page))
     writer.write(TEMP+os.sep+"input.pdf")
 
-def createImages():
-    now = datetime.now() # current date and time
+def createImages(pdf):
+#     now = datetime.now() # current date and time
 #     year = now.strftime("%Y")
 # #     print("year:", year)
 #     month = now.strftime("%m")
@@ -52,7 +52,7 @@ def createImages():
     for x in doc:
         pix = x.get_pixmap(alpha=False,matrix=mat)
         img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-        img.save("%s%s.jpg" %(TEMP+os.sep,now))
+        img.save("%s%s%s.jpg" %(str(pdf),TEMP+os.sep,format))
 #         img.save("%s%s.jpg" %(TEMP+os.sep,format(x.number, '04d')))
 
         #pix.writePNG("%i.png" % x.number)
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     pdf = sys.argv[1]
     name = sys.argv[2]
     createPDF(pdf)
-    createImages()
+    createImages(pdf)
     #renameFiles()
     createAPKG(name)
     removeTemp()
